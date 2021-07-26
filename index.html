@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src = 'https://aframe.io/releases/1.2.0/aframe.min.js'></script>
+        <script src = 'https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js'></script>
+        <script src = 'rotatingMap.js'></script>
+        <script src = 'diverRotating.js'></script>
+        <Script src = 'fish.js'></Script>
+        <script src = 'treasure.js'></script>
+        <script src = "https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+            <a-entity id = 'camera' look-controls camera position = '0 0 20'></a-entity>
+
+            <!--assets Manager-->
+            <a-assets>
+                <a-asset-item id = 'terrainImage' src= './underWater/scene.gltf'></a-asset-item>
+                <a-asset-item id= 'scuba-diver' src = './scubaDiver/scene.gltf'></a-asset-item>
+            </a-assets>
+
+            <!--Caling Terrain-->
+            <a-entity 
+            id = 'terrain'
+            gltf-model = '#terrainImage' 
+            scale = '7 5 9' 
+            position = '0 -50 -50' 
+            terrain-rotation-reader 
+            animation = 'property:position ; to: 0 -30 50 ; easing:linear; loop:true; dur:35000'
+            creating-fish
+            coins>
+            </a-entity>
+
+            <!--calling Diver-->
+            <a-entity 
+            gltf-model = '#scuba-diver' 
+            scale = '0.1 0.1 0.1' 
+            position = '0 -20 0' 
+            rotation = '0 0 0' 
+            diver-rotation-reader 
+            dynamic-body = 'mass:0'
+            gameplay></a-entity>
+
+            <a-entity id = 'header'
+            position = '0 10 0'>
+                <a-entity position = '-25 4 0' text = 'font:exo2bold; align:center; width:54; color:black; value:VR Scuba Dive'></a-entity>
+                <a-entity position = '-20.5 1.3 0' text = 'font:aileronsemibold; align:left; width:15; color:black; value:time\nremaining'></a-entity>
+                <a-entity id = 'timer' position = '-30.5 1.5 0' text = 'font:exo2bold; align:center; width:35; color:black; value:00:00'></a-entity>
+            </a-entity>
+
+            <a-entity position = '20 4 0' >
+                <a-entity position = '-33.7 7.3 0' text = 'font:aileronsemibold; align:left; width:15; color:black; value:targets\nremaining'></a-entity>
+                <a-entity id = 'targets' position = '-42.5 7.5 0' text = 'font:exo2bold; align:center; width:40; color:black; value:10'></a-entity>
+            </a-entity>
+
+            <a-entity position = '-14 4 0' >
+                <a-entity position = '65 9.5 0' text = 'font:aileronsemibold; align:left; width:50; color:black; value:Score'></a-entity>
+                <a-entity id = 'scores' position = '43 7.5 0' text = 'font:exo2bold; align:center; width:40; color:black; value:0'></a-entity>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>
